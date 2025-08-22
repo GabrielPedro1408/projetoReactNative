@@ -1,12 +1,19 @@
 import React from "react";
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import { StyleSheet, View, Text, FlatList, Button } from "react-native";
+import { NavigationProp } from "@react-navigation/native";
+import { FIREBASE_AUTH } from "../../firebaseConfig";
+interface RouterProps {
+    navigation: NavigationProp<any, any>;
+}
 
-export function TelaRelacaoAlunos() {
+const ScreenRelacaoAlunos = ({navigation}: RouterProps) =>{
+
     return(
         <View>
-            <Text >Bosta</Text>
+            <Button onPress={() => navigation.navigate('ScreenFaltasAlunos')} title="Falta de Alunos"/>
+            <Button onPress={() => navigation.navigate('ScreenCadastroAlunos')} title="Cadastro de Alunos"/>
         </View>
-    )
+    );
 }
 const styles = StyleSheet.create({
     container: {
@@ -14,3 +21,5 @@ const styles = StyleSheet.create({
         marginTop:50,
     },
 });
+
+export default ScreenRelacaoAlunos

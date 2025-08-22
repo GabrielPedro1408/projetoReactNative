@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, FlatList } from "react-native";
 
-export function TelaCadastroAluno() {
+export function ScreenCadastroAluno() {
     return(
         <View>
             <Text>Merda</Text>
