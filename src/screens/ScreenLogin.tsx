@@ -15,7 +15,6 @@ const ScreenLogin = () => {
             setloading(true);
             try {
                 const response = await signInWithEmailAndPassword(auth, email, senha);
-                console.log(response);
             } catch (error) {
                 console.log(error);
                 alert('dados não cadastrados no b.d' + error)
@@ -154,8 +153,8 @@ const styles = StyleSheet.create({
         marginTop: 6,
         borderWidth: 1,
         padding: 10,
-        borderColor: '#480885ff', // Cor da borda
-        borderRadius: 5,   // Cantos arredondados
+        borderColor: '#480885ff',
+        borderRadius: 5,
     },
     
      button:{

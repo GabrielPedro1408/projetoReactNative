@@ -1,11 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import { StyleSheet, View, Text, FlatList, SafeAreaView } from "react-native";
 
-const ScreenFaltasAlunos = ()=> {
+export const ScreenFaltasAlunos = ()=> {
     return(
-        <View>
+        <SafeAreaView style={styles.container}>
             <Text >Bosta</Text>
-        </View>
+        </SafeAreaView>
     )
 }
 const styles = StyleSheet.create({
@@ -14,4 +14,3 @@ const styles = StyleSheet.create({
         marginTop:50,
     },
 });
-export default ScreenFaltasAlunos
