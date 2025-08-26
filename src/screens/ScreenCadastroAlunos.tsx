@@ -1,6 +1,6 @@
 import { addDoc, collection } from "firebase/firestore";
 import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, View, Text, TextInput, Button, SafeAreaView } from "react-native";
+import { StyleSheet, View, Text, TextInput, Button, SafeAreaView, Alert } from "react-native";
 import { FIRESTORE_DB } from "../../firebaseConfig";
 
 export function ScreenCadastroAluno() {
@@ -15,8 +15,9 @@ export function ScreenCadastroAluno() {
                 alert("Preencha o campo com um nome de um aluno")
             }
             else{
+                const nomeFormatado = nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase();
                 await addDoc(collection(FIRESTORE_DB, "Alunos"), {
-                Nome: nome,
+                Nome: nomeFormatado,
                 Numero: numero,
                 Turma: turma
                 });
@@ -24,81 +25,104 @@ export function ScreenCadastroAluno() {
                 setNumero('');
                 setTurma('');
                 nomeInputRef.current?.focus();
-                alert("Dados cadastrados com sucesso")
+                Alert.alert("SUCESSO","Dados cadastrados com sucesso",[
+                    {
+                        text: "Sair",
+                        onPress: () => console.log('Cancel Pressed'),
+                        style:'cancel',
+                    },
+                    {
+                        text: "Ok",
+                        onPress: () => console.log('OK Pressed')
+                    }
+                ]);
             }
         } catch (error) {
             alert("Deu Bosta " + error)
         }
     };
     return(
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.body}>
             <View style={styles.form}>
-                <View style={styles.formItem}>
-                    <Text style={styles.label}>Nome:</Text>
-                    <TextInput
-                    ref={nomeInputRef}
-                    style={styles.input}
-                    value={nome}
-                    onChangeText={setNome}
-                    placeholder='Ex: Gabriel dos Santos'
-                    placeholderTextColor={"#480885ff"}
-                    />
-                </View>
-                <View style={styles.formItem}>
-                    <Text style={styles.label}>Número:</Text>
-                    <TextInput
-                    style={styles.input}
-                    value={numero}
-                    onChangeText={setNumero}
-                    placeholder="Ex: 10"
-                    placeholderTextColor={"#480885ff"}
-                    keyboardType="phone-pad"
-                    />
-                </View>
-                <View style={styles.formItem}>
-                    <Text style={styles.label}>Turma:</Text>
-                    <TextInput
-                    style={styles.input}
-                    value={turma}
-                    onChangeText={setTurma}
-                    placeholder="Ex: 3º INFO A"
-                    placeholderTextColor={"#480885ff"}
-                    />
-                </View>
-                <View style={styles.button}>
-                    <Button
-                    color={"#480885ff"}
-                    title="Cadastrar"
-                    onPress={cadastrar}
-                    />
+                <View style={styles.formstyle}>
+                    <View style={styles.formItem}>
+                        <Text style={styles.label}>Nome:</Text>
+                        <TextInput
+                        ref={nomeInputRef}
+                        style={styles.input}
+                        value={nome}
+                        onChangeText={setNome}
+                        placeholder='Ex: Gabriel dos Santos'
+                        placeholderTextColor={"#480885ff"}
+                        />
+                    </View>
+                    <View style={styles.formItem}>
+                        <Text style={styles.label}>Número:</Text>
+                        <TextInput
+                        style={styles.input}
+                        value={numero}
+                        onChangeText={setNumero}
+                        placeholder="Ex: 10"
+                        placeholderTextColor={"#480885ff"}
+                        keyboardType="phone-pad"
+                        />
+                    </View>
+                    <View style={styles.formItem}>
+                        <Text style={styles.label}>Turma:</Text>
+                        <TextInput
+                        style={styles.input}
+                        value={turma}
+                        onChangeText={setTurma}
+                        placeholder="Ex: 3º INFO A"
+                        placeholderTextColor={"#480885ff"}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
+                        color={"#480885ff"}
+                        title="Cadastrar"
+                        onPress={cadastrar}
+                        />
+                    </View>
                 </View>
             </View>
         </SafeAreaView>
     );
 }
 const styles = StyleSheet.create({
-    container: {
+    
+    body:{
         flex:1,
-        margin:10,
-        marginTop:20,
+        backgroundColor:'#ffffffff',
+        padding:15
     },
 
     form:{
+        flex:3,
         bottom:30,
         marginVertical:'auto',
-        borderWidth:1,
-        borderColor:'#e6b11fff',
+        padding:8,
+        justifyContent:'center',
+    },
+
+    formstyle:{
+        backgroundColor:'#ffffffff',
         paddingBottom:30,
         borderRadius:15,
-        padding:12
+        padding:12,
+        elevation:4,
+        
     },
+
     formItem:{
         margin:8,
     },
+
     label:{
+        fontWeight:300,
         fontSize: 18,
         marginBottom: 2,
-        color:"#480885ff"
+        color:"#000000ff",
         
     },
 
@@ -109,6 +133,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderColor: '#480885ff',
         borderRadius: 5,
+        fontWeight:100
     },
 
     button:{

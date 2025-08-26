@@ -86,7 +86,7 @@ const ScreenLogin = () => {
                                 <Button
                                 onPress={signUp}
                                 title="Criar uma conta"
-                                accessibilityLabel="Entrar no sistema"
+                                accessibilityLabel="Criar uma conta no sistema"
                                 color={"#480885ff"}
                                 />
                             </View>
